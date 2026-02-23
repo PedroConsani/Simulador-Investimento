@@ -13,6 +13,7 @@
     </form>
     <?php 
         require_once __DIR__ . "/../../config/config.php";
+        //isset() verifica se a variável foi definida e não é nula, ou seja, se o formulário foi submetido
         if(isset($_POST["nome_acao"])){
             $acao = $_POST["nome_acao"];
             $url = "https://financialmodelingprep.com/stable/profile?symbol=$acao&apikey=".API_KEY;
