@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user) {
             $_SESSION['utilizador'] = $user;
             // redirecionar para página principal ou área restrita
-            header('Location: index.html');
+            header('Location: index.php');
             exit;
         } else {
             $message = 'Credenciais inválidas.';

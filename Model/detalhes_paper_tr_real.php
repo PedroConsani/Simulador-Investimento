@@ -7,7 +7,7 @@
 </head>
 <body>
     <nav>
-        <a href="/investimento/index.html"><li>Home</li></a>
+        <a href="/investimento/index.php"><li>Home</li></a>
         <a href="paper_tr_passado.php"><li>Paper Trading Passado</li></a>
         <a href="paper_tr_real.php"><li>Paper Trading Real</li></a>
     </nav>
