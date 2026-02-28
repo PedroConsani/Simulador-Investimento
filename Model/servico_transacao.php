@@ -12,7 +12,7 @@
         <button type="submit">Verificar</button>
     </form>
     <?php 
-        require_once __DIR__ . "/../../config/config.php";
+        require_once __DIR__ . "../../config/config.php"; //Acessa a constante API_KEY para não expor a chave ao ambiente de produção
         //isset() verifica se a variável foi definida e não é nula, ou seja, se o formulário foi submetido
         if(isset($_POST["nome_acao"])){
             $acao = $_POST["nome_acao"];
