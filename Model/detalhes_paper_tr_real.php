@@ -6,25 +6,34 @@
     <title>Detalhes da Empresa: <?php echo $_GET["symbol"] ?? "Desconhecida"; ?></title>
 </head>
 <body>
+    <nav>
+        <a href="/investimento/index.html"><li>Home</li></a>
+        <a href="paper_tr_passado.php"><li>Paper Trading Passado</li></a>
+        <a href="paper_tr_real.php"><li>Paper Trading Real</li></a>
+    </nav>
+
+    <form action="" method="post">oi</form>
     <?php
     require_once __DIR__ . "../../config/config.php";
+    require_once __DIR__ . "../../Model/cacheJson.php";
     if (isset($_GET["symbol"])) {
         $symbol = $_GET["symbol"];
         $url = "https://financialmodelingprep.com/stable/profile?symbol=$symbol&apikey=".API_KEY;
-        $response = file_get_contents($url);
-        $dados = json_decode($response, true);
-        $arquivo = __DIR__ . "../../Dados/infoEmpresa_$symbol.json";
-        file_put_contents($arquivo, json_encode($dados, JSON_PRETTY_PRINT));
+        if (carregarDadosCache("infoEmpresa_$symbol")){
+            $dados = carregarDadosCache("infoEmpresa_$symbol");
+        }
+        else {
+            $dados = criarCacheJson("infoEmpresa_$symbol", $url);
+        }
 
         foreach ($dados as $empresa){
             echo "<li> Nome da Empresa: " . $empresa["companyName"] . "</li>";
             echo "<li> Preço da Ação: " . $empresa["price"] . "</li>";
             echo "Descrição: " . $empresa["description"];
-        }
-
-        
-
+        }       
     }
-    ?>
+?>
+
+
 </body>
 </html>
