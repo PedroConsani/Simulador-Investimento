@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p><?php echo htmlspecialchars($message); ?></p>
     <?php endif; ?>
     <form action="" method="post">
-        <label for="username">Usuário:</label>
+        <label for="username">Username:</label>
         <input type="text" name="username" id="username" required>
         <br/>
         <label for="senha">Senha:</label>

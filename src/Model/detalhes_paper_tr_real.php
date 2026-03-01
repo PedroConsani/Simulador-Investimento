@@ -9,7 +9,7 @@
 
 <body>
     <nav>
-        <a href="/investimento/index.php">
+        <a href="/investimento/public/index.php">
             <li>Home</li>
         </a>
         <a href="paper_tr_jogo.php">
@@ -51,6 +51,40 @@
             echo '<p>Total: $ <span id="total"> 0.00 </span></p>';
             echo '<button type="submit" name="comprar">Comprar</button>';
             echo '</form>';
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quantidade'])) {
+            $quant = intval($_POST['quantidade']);
+            if ($quant <= 0) {
+                echo "<p>Quantidade inválida.</p>";
+            } else {
+                if (!isset($_SESSION['utilizador'])) {
+                    echo "<p>Faça login para comprar ações.</p>";
+                } else {
+                    $username = $_SESSION['utilizador']->getUsername();
+                    $usuarioData = Utilizador::findUser($username);
+                    $saldoAtual = isset($usuarioData['saldo']) ? floatval($usuarioData['saldo']) : 0.0;
+                    $custo = $precoAtual * $quant;
+                    if ($saldoAtual < $custo) {
+                        echo "<p>Saldo insuficiente. Custo: $custo, Saldo: $saldoAtual</p>";
+                    } else {
+                        $novoSaldo = $saldoAtual - $custo;
+                        // Atualiza saldo e histórico
+                        Utilizador::atualizarSaldo($username, $novoSaldo);
+                        $entrada = [
+                            'tipo' => 'compra',
+                            'symbol' => $symbol,
+                            'nomeEmpresa' => $empresa['companyName'] ?? '',
+                            'quantidade' => $quant,
+                            'preco' => $precoAtual,
+                            'data' => date("Y-m-d H:i:s")
+                        ];
+                        Utilizador::adicionarHistorico($username, $entrada);
+                        // Atualiza o objeto na sessão
+                        $_SESSION['utilizador']->setSaldoReal($novoSaldo);
+                        echo "<p>Compra efetuada com sucesso! Custo: $custo. Novo saldo: $novoSaldo</p>";
+                    }
+                }
+            }
         }
     }
     ?>

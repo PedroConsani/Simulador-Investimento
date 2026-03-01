@@ -12,9 +12,9 @@ class Utilizador {
      * @param string $senha
      * @param float $saldoReal   valor inicial em dinheiro real (padrão 0)
      */
-    public function __construct($username, $senha, $saldoReal = 0.0) {
+    public function __construct($username, $senha = '', $saldoReal = 0.0) {
         $this->username   = $username;
-        $this->senha      = $senha;
+        $this->senha = $senha;
         $this->saldoReal  = $saldoReal;
     }
 
@@ -31,10 +31,6 @@ class Utilizador {
         return $this->saldoReal;
     }
 
-    public function setSaldoReal($valor) {
-        $this->saldoReal = $valor;
-    }
-
     public function getSaldoJogo() {
         return $this->saldoJogo;
     }
@@ -47,7 +43,7 @@ class Utilizador {
      * Funções estáticas
      ********************/
     private static function getStoragePath() {
-        return __DIR__ . "/../utilizadores.json";
+        return __DIR__ . "/../../data/utilizadores.json";
     }
 
     private static function loadUsers() {
@@ -92,6 +88,7 @@ class Utilizador {
             'username' => $username,
             'password' => $hash,
             'saldo' => 0.0,
+            'historico' => []
         ];
         self::saveUsers($users);
         return true;
@@ -100,19 +97,34 @@ class Utilizador {
     public static function authenticate(string $username, string $senha) {
         $u = self::findUser($username);
         if ($u && password_verify($senha, $u['password'])) {
-            // retornar objeto utiliador com saldos carregados
-            $user = new Utilizador($u['username'], '', $u['saldoReal'], $u['saldoJogo']);
+            // retornar objeto utilizador com saldo carregado
+            $saldo = isset($u['saldo']) ? floatval($u['saldo']) : 0.0;
+            $user = new Utilizador($u['username'], '', $saldo);
             return $user;
         }
         return false;
     }
 
     public static function atualizarSaldo(string $username, float $novoSaldoReal) {
-        //Atualiza os saldos do utilizador no arquivo JSON.
+        //Atualiza o saldo do utilizador no arquivo JSON.
         $users = self::loadUsers();
         foreach ($users as &$u) {
             if ($u['username'] === $username) {
                 $u['saldo'] = $novoSaldoReal;
+                break;
+            }
+        }
+        self::saveUsers($users);
+    }
+
+    public static function adicionarHistorico(string $username, array $entrada) {
+        $users = self::loadUsers();
+        foreach ($users as &$u) {
+            if ($u['username'] === $username) {
+                if (!isset($u['historico']) || !is_array($u['historico'])) {
+                    $u['historico'] = [];
+                }
+                $u['historico'][] = $entrada;
                 break;
             }
         }

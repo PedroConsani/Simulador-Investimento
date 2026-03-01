@@ -1,12 +1,20 @@
 [
     {
         "username": "pedro",
-        "password": "$2y$10$L9HH.eC9N80UmH02.wAemeo2xQzaEF8KQCbrhtblSki3xYwR.6fkm",
-        "saldo": 0.0
+        "password": "$2y$10$TijYAQBOPSq90s36efs66OQ9VQ1T7yHw6zEALCuqDem0WAWavHg46",
+        "saldo": 0,
+        "historico": []
     },
     {
-        "username": "gabriel",
-        "password": "$2y$10$.ninwWwQqFvSllbdusP5muoedhHX4KoVvIK\/aEowqGp\/RAGxd3aty",
-        "saldo": 0.0
+        "username": "admin",
+        "password": "$2y$10$QIqGVmEUUF4NE2K\/aR3lu.HXMszBhWQtfkY6pW4OaIaLm2Z2dN7YG",
+        "saldo": 300,
+        "historico": []
+    },
+    {
+        "username": "teste",
+        "password": "$2y$10$qPUbwrKZ79hw9jWx19oaLexrfABrpSPo7Me65sVhBR0vLK2U6ZBz2",
+        "saldo": 0,
+        "historico": []
     }
 ]

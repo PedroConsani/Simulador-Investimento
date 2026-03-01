@@ -2,54 +2,76 @@
 class Historico
 {
 
-    private static function getPath($username)
+    private static function getStoragePath()
     {
-        return __DIR__ . "/../Dados/historico/{$username}.json";
+        // usa o ficheiro existente de utilizadores para guardar histórico em cada utilizador
+        return __DIR__ . "/../../data/utilizadores.json";
+    }
+
+    private static function loadAllUsers()
+    {
+        $file = self::getStoragePath();
+        if (!file_exists($file)) {
+            return [];
+        }
+        $json = file_get_contents($file);
+        $data = json_decode($json, true);
+        if (!is_array($data)) {
+            return [];
+        }
+        return $data;
+    }
+
+    private static function saveAllUsers(array $users)
+    {
+        $file = self::getStoragePath();
+        file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));
     }
 
     public static function adicionarCompra($username, $nomeEmpresa, $symbol, $quantidade, $preco)
     {
-
-        $arquivo = self::getPath($username);
-
-        if (file_exists($arquivo)) {
-            $dados = json_decode(file_get_contents($arquivo), true);
-        } else {
-            $dados = [];
+        $users = self::loadAllUsers();
+        foreach ($users as &$u) {
+            if ($u['username'] === $username) {
+                if (!isset($u['historico']) || !is_array($u['historico'])) {
+                    $u['historico'] = [];
+                }
+                $entrada = [
+                    'tipo' => 'COMPRA',
+                    'symbol' => $symbol,
+                    'nomeEmpresa' => $nomeEmpresa,
+                    'quantidade' => $quantidade,
+                    'preco' => $preco,
+                    'data' => date("Y-m-d H:i:s")
+                ];
+                $u['historico'][] = $entrada;
+                break;
+            }
         }
-
-        $dados[] = [
-            "------Compra------",
-            "symbol" => $symbol,
-            "nomeEmpresa" => $nomeEmpresa,
-            "quantidade" => $quantidade,
-            "preco" => $preco,
-            "dataCompra" => date("d-m-Y H:i:s")
-        ];
-
-        file_put_contents($arquivo, json_encode($dados, JSON_PRETTY_PRINT));
+        self::saveAllUsers($users);
     }
+
     public static function adicionarVenda($username, $nomeEmpresa, $symbol, $quantidade, $preco)
     {
-
-        $arquivo = self::getPath($username);
-
-        if (file_exists($arquivo)) {
-            $dados = json_decode(file_get_contents($arquivo), true);
-        } else {
-            $dados = [];
+        $users = self::loadAllUsers();
+        foreach ($users as &$u) {
+            if ($u['username'] === $username) {
+                if (!isset($u['historico']) || !is_array($u['historico'])) {
+                    $u['historico'] = [];
+                }
+                $entrada = [
+                    'tipo' => 'VENDA',
+                    'symbol' => $symbol,
+                    'nomeEmpresa' => $nomeEmpresa,
+                    'quantidade' => $quantidade,
+                    'preco' => $preco,
+                    'data' => date("Y-m-d H:i:s")
+                ];
+                $u['historico'][] = $entrada;
+                break;
+            }
         }
-
-        $dados[] = [
-            "------Venda------",
-            "symbol" => $symbol,
-            "nomeEmpresa" => $nomeEmpresa,
-            "quantidade" => $quantidade,
-            "preco" => $preco,
-            "dataVenda" => date("d-m-Y H:i:s")
-        ];
-
-        file_put_contents($arquivo, json_encode($dados, JSON_PRETTY_PRINT));
+        self::saveAllUsers($users);
     }
 }
 ?>
