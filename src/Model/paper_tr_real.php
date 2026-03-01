@@ -11,7 +11,7 @@
     <button type="submit">Buscar</button>
 
   <?php
-    require_once __DIR__ . "/../config/config.php";
+    require_once __DIR__ . "/../../config/config.php";
     require_once __DIR__ . "/cacheJson.php";
 
     $dados = [];
@@ -41,7 +41,7 @@
             foreach ($dados as $empresa) {
                 echo "<li>" . $empresa["name"] . " (" . $empresa["symbol"] . ")";
                 //Caso o utilizador clicar em Ver detalhes, será redirecionado para a página detalhes.php
-                echo "<a href = 'detalhes_paper_tr_jogo.php?symbol=" . $empresa["symbol"] . "'> Ver detalhes</a>";
+                echo "<a href = 'detalhes_paper_tr_real.php?symbol=" . $empresa["symbol"] . "'> Ver detalhes</a>";
             }
             echo "</ul>";
         } else {

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/Model/utilizador.php";
+require_once __DIR__ . "/../src/Model/utilizador.php";
 session_start();
 $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

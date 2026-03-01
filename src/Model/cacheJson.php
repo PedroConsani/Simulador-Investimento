@@ -3,7 +3,7 @@ function carregarDadosCache($tipoDado){
     /*Recebe um tipo de dado string que está sendo procurado.
     Retorna dados que estão armazenados em cache se existe, caso contrário retorna null.
     */ 
-    $arquivo = __DIR__ . "/../Dados/dados_$tipoDado.json";
+    $arquivo = __DIR__ . "/../../data/dados_$tipoDado.json";
 
     if (file_exists($arquivo)) {
         /*Verifica se o arquivo para essa procura existe.
@@ -27,7 +27,8 @@ function criarCacheJson($tipoDado, $url){
     /*Recebe um tipo de dado string e um dado array.
     Cria um arquivo json com o nome do tipo de dado e salva o dado nesse arquivo.
     */ 
-    $arquivo = __DIR__ . "/../Dados/dados_$tipoDado.json";
+    $tipoDado = strtolower($tipoDado); // Converte o tipo de dado para minúsculo para evitar problemas de nomeação
+    $arquivo = __DIR__ . "/../../data/dados_$tipoDado.json";
     $response = file_get_contents($url);
     $novoDados = json_decode($response, true);
     foreach($novoDados as $dado){

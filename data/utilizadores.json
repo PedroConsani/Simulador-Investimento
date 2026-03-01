@@ -2,13 +2,11 @@
     {
         "username": "pedro",
         "password": "$2y$10$L9HH.eC9N80UmH02.wAemeo2xQzaEF8KQCbrhtblSki3xYwR.6fkm",
-        "saldoReal": 0,
-        "saldoJogo": 0
+        "saldo": 0.0
     },
     {
         "username": "gabriel",
         "password": "$2y$10$.ninwWwQqFvSllbdusP5muoedhHX4KoVvIK\/aEowqGp\/RAGxd3aty",
-        "saldoReal": 0,
-        "saldoJogo": 0
+        "saldo": 0.0
     }
 ]

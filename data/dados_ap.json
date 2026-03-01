@@ -1,0 +1,352 @@
+[
+    {
+        "symbol": "APRI.ME",
+        "name": "APRI",
+        "currency": "RUB",
+        "exchangeFullName": "Moscow Stock Exchange",
+        "exchange": "MCX"
+    },
+    {
+        "symbol": "API3USD",
+        "name": "API3 USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APTUSD",
+        "name": "Aptos USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APRILUSD",
+        "name": "April USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APTV-PA",
+        "name": "Aptiv PLC",
+        "currency": "USD",
+        "exchangeFullName": "New York Stock Exchange",
+        "exchange": "NYSE"
+    },
+    {
+        "symbol": "APTV",
+        "name": "Aptiv PLC",
+        "currency": "USD",
+        "exchangeFullName": "New York Stock Exchange",
+        "exchange": "NYSE"
+    },
+    {
+        "symbol": "APAJF",
+        "name": "APA Group",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "APA.AX",
+        "name": "APA Group",
+        "currency": "AUD",
+        "exchangeFullName": "Australian Securities Exchange",
+        "exchange": "ASX"
+    },
+    {
+        "symbol": "6108.TW",
+        "name": "APCB Inc.",
+        "currency": "TWD",
+        "exchangeFullName": "Taiwan Stock Exchange",
+        "exchange": "TAI"
+    },
+    {
+        "symbol": "270520.KQ",
+        "name": "APTN Inc.",
+        "currency": "KRW",
+        "exchangeFullName": "KOSDAQ",
+        "exchange": "KOE"
+    },
+    {
+        "symbol": "0YCP.L",
+        "name": "Aptiv PLC",
+        "currency": "USD",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "NFTUSD",
+        "name": "APENFT USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APEINUSD",
+        "name": "Ape In USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APETIT.HE",
+        "name": "Apetit Oyj",
+        "currency": "EUR",
+        "exchangeFullName": "NASDAQ Helsinki",
+        "exchange": "HEL"
+    },
+    {
+        "symbol": "APC.F",
+        "name": "Apple Inc.",
+        "currency": "EUR",
+        "exchangeFullName": "Frankfurt Stock Exchange",
+        "exchange": "FSX"
+    },
+    {
+        "symbol": "APC.DE",
+        "name": "Apple Inc.",
+        "currency": "EUR",
+        "exchangeFullName": "Deutsche B\u00f6rse",
+        "exchange": "XETRA"
+    },
+    {
+        "symbol": "AAPL.NE",
+        "name": "Apple Inc.",
+        "currency": "CAD",
+        "exchangeFullName": "CBOE CA",
+        "exchange": "NEO"
+    },
+    {
+        "symbol": "AAPL.MX",
+        "name": "Apple Inc.",
+        "currency": "MXN",
+        "exchangeFullName": "Mexican Stock Exchange",
+        "exchange": "MEX"
+    },
+    {
+        "symbol": "AAPL.DE",
+        "name": "Apple Inc.",
+        "currency": "EUR",
+        "exchangeFullName": "Deutsche B\u00f6rse",
+        "exchange": "XETRA"
+    },
+    {
+        "symbol": "AAPL",
+        "name": "Apple Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Global Select",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "APYSUSD",
+        "name": "APYSwap USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APXUSD",
+        "name": "ApolloX USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APEUSD",
+        "name": "ApeCoin USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APT.WA",
+        "name": "Apator S.A.",
+        "currency": "PLN",
+        "exchangeFullName": "Warsaw Stock Exchange",
+        "exchange": "WSE"
+    },
+    {
+        "symbol": "APR",
+        "name": "Apria, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Global Select",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "APMSF",
+        "name": "Aperam S.A.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "APEMY",
+        "name": "Aperam S.A.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "APAM.AS",
+        "name": "Aperam S.A.",
+        "currency": "EUR",
+        "exchangeFullName": "Euronext Amsterdam",
+        "exchange": "AMS"
+    },
+    {
+        "symbol": "APPCUSD",
+        "name": "AppCoins USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APMUSD",
+        "name": "apM Coin USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APYP",
+        "name": "AppYea, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "APTX",
+        "name": "Aptinyx Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Global Select",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "APTI",
+        "name": "Apptio, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "APGN.SW",
+        "name": "Apg Sga S.A.",
+        "currency": "CHF",
+        "exchangeFullName": "Swiss Exchange",
+        "exchange": "SIX"
+    },
+    {
+        "symbol": "6177.T",
+        "name": "AppBank Inc.",
+        "currency": "JPY",
+        "exchangeFullName": "Tokyo Stock Exchange",
+        "exchange": "JPX"
+    },
+    {
+        "symbol": "0QN0.L",
+        "name": "APG SGA S.A.",
+        "currency": "CHF",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "APXYY",
+        "name": "Appen Limited",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "APX.AX",
+        "name": "Appen Limited",
+        "currency": "AUD",
+        "exchangeFullName": "Australian Securities Exchange",
+        "exchange": "ASX"
+    },
+    {
+        "symbol": "APPEF",
+        "name": "Appen Limited",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "APN.WA",
+        "name": "Aplisens S.A.",
+        "currency": "PLN",
+        "exchangeFullName": "Warsaw Stock Exchange",
+        "exchange": "WSE"
+    },
+    {
+        "symbol": "APLAB.BO",
+        "name": "Aplab Limited",
+        "currency": "INR",
+        "exchangeFullName": "Bombay Stock Exchange",
+        "exchange": "BSE"
+    },
+    {
+        "symbol": "APGT",
+        "name": "Appgate, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "4174.T",
+        "name": "Appirits Inc.",
+        "currency": "JPY",
+        "exchangeFullName": "Tokyo Stock Exchange",
+        "exchange": "JPX"
+    },
+    {
+        "symbol": "VISIONUSD",
+        "name": "APY Vision USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APDUSD",
+        "name": "ApeParkDAO USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "APTECHT.NS",
+        "name": "Aptech Limited",
+        "currency": "INR",
+        "exchangeFullName": "National Stock Exchange of India",
+        "exchange": "NSE"
+    },
+    {
+        "symbol": "APTECHT.BO",
+        "name": "Aptech Limited",
+        "currency": "INR",
+        "exchangeFullName": "Bombay Stock Exchange",
+        "exchange": "BSE"
+    },
+    {
+        "symbol": "APQT",
+        "name": "Appliqate Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "APPLX",
+        "name": "Appleseed Fund",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "APPF",
+        "name": "AppFolio, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Global Market",
+        "exchange": "NASDAQ"
+    }
+]

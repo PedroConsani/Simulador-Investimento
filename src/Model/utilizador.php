@@ -11,13 +11,11 @@ class Utilizador {
      * @param string $username
      * @param string $senha
      * @param float $saldoReal   valor inicial em dinheiro real (padrão 0)
-     * @param float $saldoJogo  valor inicial em dinheiro fictício para paper trading
      */
-    public function __construct($username, $senha, $saldoReal = 0.0, $saldoJogo = 0.0) {
+    public function __construct($username, $senha, $saldoReal = 0.0) {
         $this->username   = $username;
         $this->senha      = $senha;
         $this->saldoReal  = $saldoReal;
-        $this->saldoJogo = $saldoJogo;
     }
 
     public function getUsername() {
@@ -93,8 +91,7 @@ class Utilizador {
         $users[] = [
             'username' => $username,
             'password' => $hash,
-            'saldoReal' => 0.0,
-            'saldoJogo' => 0.0
+            'saldo' => 0.0,
         ];
         self::saveUsers($users);
         return true;
@@ -108,6 +105,18 @@ class Utilizador {
             return $user;
         }
         return false;
+    }
+
+    public static function atualizarSaldo(string $username, float $novoSaldoReal) {
+        //Atualiza os saldos do utilizador no arquivo JSON.
+        $users = self::loadUsers();
+        foreach ($users as &$u) {
+            if ($u['username'] === $username) {
+                $u['saldo'] = $novoSaldoReal;
+                break;
+            }
+        }
+        self::saveUsers($users);
     }
 }
 ?>
