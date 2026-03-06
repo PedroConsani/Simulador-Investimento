@@ -2,8 +2,17 @@
     {
         "username": "pedro",
         "password": "$2y$10$TijYAQBOPSq90s36efs66OQ9VQ1T7yHw6zEALCuqDem0WAWavHg46",
-        "saldo": 0,
-        "historico": []
+        "saldo": 8943.28,
+        "historico": [
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 4,
+                "preco": 264.18,
+                "data": "2026-03-06 21:22:51"
+            }
+        ]
     },
     {
         "username": "admin",
@@ -305,6 +314,78 @@
                 "quantidade": 2,
                 "preco": 264.18,
                 "data": "2026-03-06 20:46:15"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:02:53"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:02:56"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:05:13"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:05:37"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:12:26"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:13:19"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:13:30"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:13:40"
+            },
+            {
+                "tipo": "venda",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 0,
+                "data": "2026-03-06 21:13:51"
             }
         ]
     },

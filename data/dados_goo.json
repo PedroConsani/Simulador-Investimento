@@ -1,0 +1,352 @@
+[
+    {
+        "symbol": "GOOCHUSD",
+        "name": "Gooch USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GOOUSD",
+        "name": "Gooeys USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GOFXUSD",
+        "name": "GooseFX USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GDWN.L",
+        "name": "Goodwin PLC",
+        "currency": "GBp",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "HEELUSD",
+        "name": "Good Dog USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GMEMEUSD",
+        "name": "GoodMeme USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GOD.OL",
+        "name": "Goodtech ASA",
+        "currency": "NOK",
+        "exchangeFullName": "Oslo Stock Exchange",
+        "exchange": "OSL"
+    },
+    {
+        "symbol": "GMGSF",
+        "name": "Goodman Group",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GMG.AX",
+        "name": "Goodman Group",
+        "currency": "AUD",
+        "exchangeFullName": "Australian Securities Exchange",
+        "exchange": "ASX"
+    },
+    {
+        "symbol": "GHMP",
+        "name": "Good Hemp, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GFELF",
+        "name": "Goodfellow Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GDL.TO",
+        "name": "Goodfellow Inc.",
+        "currency": "CAD",
+        "exchangeFullName": "Toronto Stock Exchange",
+        "exchange": "TSX"
+    },
+    {
+        "symbol": "7351.T",
+        "name": "Goodpatch, Inc.",
+        "currency": "JPY",
+        "exchangeFullName": "Tokyo Stock Exchange",
+        "exchange": "JPX"
+    },
+    {
+        "symbol": "GENSLRUSD",
+        "name": "Good Gensler USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GOOI",
+        "name": "Gooi Global, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GMER",
+        "name": "Good Gaming, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GFUSD",
+        "name": "Good Fire Token USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GHH.L",
+        "name": "Gooch & Housego PLC",
+        "currency": "GBp",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "7676.T",
+        "name": "Goodspeed Co., Ltd.",
+        "currency": "JPY",
+        "exchangeFullName": "Tokyo Stock Exchange",
+        "exchange": "JPX"
+    },
+    {
+        "symbol": "GPCXUSD",
+        "name": "Good Person Coin USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GGGUSD",
+        "name": "Good Games Guild USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GOOD.L",
+        "name": "Good Energy Group PLC",
+        "currency": "GBp",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "GDRX",
+        "name": "GoodRx Holdings, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Global Select",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "GDDFF",
+        "name": "Goodfood Market Corp.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "FOOD.TO",
+        "name": "Goodfood Market Corp.",
+        "currency": "CAD",
+        "exchangeFullName": "Toronto Stock Exchange",
+        "exchange": "TSX"
+    },
+    {
+        "symbol": "1583.TW",
+        "name": "Goodway Machine Corp.",
+        "currency": "TWD",
+        "exchangeFullName": "Taiwan Stock Exchange",
+        "exchange": "TAI"
+    },
+    {
+        "symbol": "GOBUSD",
+        "name": "Goons of Balatroon USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GOODYEAR.NS",
+        "name": "Goodyear India Limited",
+        "currency": "INR",
+        "exchangeFullName": "National Stock Exchange of India",
+        "exchange": "NSE"
+    },
+    {
+        "symbol": "GOODYEAR.BO",
+        "name": "Goodyear India Limited",
+        "currency": "INR",
+        "exchangeFullName": "Bombay Stock Exchange",
+        "exchange": "BSE"
+    },
+    {
+        "symbol": "GOODLUCK.NS",
+        "name": "Goodluck India Limited",
+        "currency": "INR",
+        "exchangeFullName": "National Stock Exchange of India",
+        "exchange": "NSE"
+    },
+    {
+        "symbol": "GOODLUCK.BO",
+        "name": "Goodluck India Limited",
+        "currency": "INR",
+        "exchangeFullName": "Bombay Stock Exchange",
+        "exchange": "BSE"
+    },
+    {
+        "symbol": "GMT.NZ",
+        "name": "Goodman Property Trust",
+        "currency": "NZD",
+        "exchangeFullName": "New Zealand Exchange",
+        "exchange": "NZE"
+    },
+    {
+        "symbol": "BTCX.ST",
+        "name": "Goobit Group AB (publ)",
+        "currency": "SEK",
+        "exchangeFullName": "Stockholm Stock Exchange",
+        "exchange": "STO"
+    },
+    {
+        "symbol": "GOODRICKE.BO",
+        "name": "Goodricke Group Limited",
+        "currency": "INR",
+        "exchangeFullName": "Bombay Stock Exchange",
+        "exchange": "BSE"
+    },
+    {
+        "symbol": "GDBYF",
+        "name": "Goodbody Health Limited",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "4437.T",
+        "name": "gooddays holdings, Inc.",
+        "currency": "JPY",
+        "exchangeFullName": "Tokyo Stock Exchange",
+        "exchange": "JPX"
+    },
+    {
+        "symbol": "GSHD",
+        "name": "Goosehead Insurance, Inc",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Global Select",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "3475.T",
+        "name": "Good Com Asset Co., Ltd.",
+        "currency": "JPY",
+        "exchangeFullName": "Tokyo Stock Exchange",
+        "exchange": "JPX"
+    },
+    {
+        "symbol": "GVSI",
+        "name": "Good Vibrations Shoes Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GTPPP",
+        "name": "Goodyear Tire & Rubber Co.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Global Select",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "GOODY.IS",
+        "name": "Goodyear Lastikleri T.A.S.",
+        "currency": "TRY",
+        "exchangeFullName": "Istanbul Stock Exchange",
+        "exchange": "IST"
+    },
+    {
+        "symbol": "GDNP.V",
+        "name": "good natured Products Inc.",
+        "currency": "CAD",
+        "exchangeFullName": "Toronto Stock Exchange Ventures",
+        "exchange": "TSXV"
+    },
+    {
+        "symbol": "GDNPF",
+        "name": "good natured Products Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GTIM",
+        "name": "Good Times Restaurants Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Capital Market",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "GLCC",
+        "name": "Good Life China Corporation",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GDRTUSD",
+        "name": "Good Driver Reward Token USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "GWAC",
+        "name": "Good Works Acquisition Corp.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Capital Market",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "GGAMF",
+        "name": "Good Gamer Entertainment Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "GDA.AX",
+        "name": "Good Drinks Australia Limited",
+        "currency": "AUD",
+        "exchangeFullName": "Australian Securities Exchange",
+        "exchange": "ASX"
+    },
+    {
+        "symbol": "688390.SS",
+        "name": "GoodWe Technologies Co., Ltd.",
+        "currency": "CNY",
+        "exchangeFullName": "Shanghai Stock Exchange",
+        "exchange": "SHH"
+    }
+]

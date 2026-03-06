@@ -1,0 +1,352 @@
+[
+    {
+        "symbol": "X1USD",
+        "name": "MetaX USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MLTHO.PA",
+        "name": "Metavisio",
+        "currency": "EUR",
+        "exchangeFullName": "Euronext Paris",
+        "exchange": "PAR"
+    },
+    {
+        "symbol": "ALTHO.PA",
+        "name": "Metavisio",
+        "currency": "EUR",
+        "exchangeFullName": "Euronext Paris",
+        "exchange": "PAR"
+    },
+    {
+        "symbol": "MXYUSD",
+        "name": "Metaxy USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MRUNUSD",
+        "name": "Metarun USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "WEARUSD",
+        "name": "MetaWear USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "WARSUSD",
+        "name": "MetaWars USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MPLXUSD",
+        "name": "Metaplex USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MGODUSD",
+        "name": "MetaGods USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "METAVUSD",
+        "name": "MetaVPad USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "METAUSD",
+        "name": "Metadium USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "METADOGEUSD",
+        "name": "MetaDoge USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MCADEUSD",
+        "name": "Metacade USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "BMFUSD",
+        "name": "MetaFame USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MTVA",
+        "name": "MetaVia Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Global Market",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "MNRG.L",
+        "name": "MetalNRG plc",
+        "currency": "GBp",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "PEELUSD",
+        "name": "Meta Apes USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MZUSD",
+        "name": "MetaZilla USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MWUSD",
+        "name": "Metaworld USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MTLUSD",
+        "name": "Metal DAO USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MTKUSD",
+        "name": "Metakings USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MRUSD",
+        "name": "MetaRuffy USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MDBUSD",
+        "name": "MetaDubai USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MTUS",
+        "name": "Metallus Inc.",
+        "currency": "USD",
+        "exchangeFullName": "New York Stock Exchange",
+        "exchange": "NYSE"
+    },
+    {
+        "symbol": "MTLZF",
+        "name": "Metall Zug AG",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "MTLK",
+        "name": "Metalink Ltd.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "METN.SW",
+        "name": "Metall Zug AG",
+        "currency": "CHF",
+        "exchangeFullName": "Swiss Exchange",
+        "exchange": "SIX"
+    },
+    {
+        "symbol": "2605.HK",
+        "name": "MetaLight Inc",
+        "currency": "HKD",
+        "exchangeFullName": "Hong Kong Stock Exchange",
+        "exchange": "HKSE"
+    },
+    {
+        "symbol": "0QLX.L",
+        "name": "Metall Zug AG",
+        "currency": "CHF",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "MTVTUSD",
+        "name": "Metaverser USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MSUUSD",
+        "name": "MetaSoccer USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "METTUSD",
+        "name": "MetaThings USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "METAXUSD",
+        "name": "MetaverseX USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MAGEUSD",
+        "name": "MetaBrands USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "FABRICUSD",
+        "name": "MetaFabric USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MTST",
+        "name": "MetaStat, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "MRNJ",
+        "name": "Metatron, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "MLRT",
+        "name": "Metalert, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "MET1.L",
+        "name": "Metals One PLC",
+        "currency": "GBp",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "GTXO",
+        "name": "Metalert, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "RICUSD",
+        "name": "Meta Ricaro USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MUSD",
+        "name": "MetaVerse-M USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MVCO",
+        "name": "Metavesco, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "MTR.L",
+        "name": "Metal Tiger plc",
+        "currency": "GBp",
+        "exchangeFullName": "London Stock Exchange",
+        "exchange": "LSE"
+    },
+    {
+        "symbol": "MTCR",
+        "name": "Metacrine, Inc.",
+        "currency": "USD",
+        "exchangeFullName": "NASDAQ Capital Market",
+        "exchange": "NASDAQ"
+    },
+    {
+        "symbol": "3350.T",
+        "name": "Metaplanet Inc.",
+        "currency": "JPY",
+        "exchangeFullName": "Tokyo Stock Exchange",
+        "exchange": "JPX"
+    },
+    {
+        "symbol": "MEVRUSD",
+        "name": "Metaverse VR USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MCAPUSD",
+        "name": "Meta Capital USD",
+        "currency": "USD",
+        "exchangeFullName": "CCC",
+        "exchange": "CRYPTO"
+    },
+    {
+        "symbol": "MLXEF",
+        "name": "Metals X Limited",
+        "currency": "USD",
+        "exchangeFullName": "Other OTC",
+        "exchange": "OTC"
+    },
+    {
+        "symbol": "MLX.AX",
+        "name": "Metals X Limited",
+        "currency": "AUD",
+        "exchangeFullName": "Australian Securities Exchange",
+        "exchange": "ASX"
+    }
+]

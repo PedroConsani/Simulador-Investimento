@@ -33,10 +33,11 @@
     if (isset($_GET["symbol"])) {
         $symbol = $_GET["symbol"];
         $url = "https://financialmodelingprep.com/stable/profile?symbol=$symbol&apikey=" . API_KEY;
-        if (carregarDadosCache("infoEmpresa_$symbol")) {
-            $dados = carregarDadosCache("infoEmpresa_$symbol");
+        
+        if (carregarDadosCache("info_empresa_$symbol") && ($_SESSION["utilizador"]->getUsername()== "admin")) {
+            $dados = carregarDadosCache("info_empresa_$symbol");
         } else {
-            $dados = criarCacheJson("infoEmpresa_$symbol", $url);
+            $dados = criarCacheJson("info_empresa_$symbol", $url);
         }
 
         foreach ($dados as $empresa) {

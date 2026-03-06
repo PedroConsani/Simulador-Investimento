@@ -12,7 +12,6 @@
     if (isset($_SESSION['utilizador']) && $_SESSION['utilizador'] instanceof Utilizador) {
         $user = $_SESSION['utilizador'];
         echo "<h1>Bem-vindo, " . htmlspecialchars($user->getUsername()) . "!</h1>";
-        echo "<p>Saldo: " . $user->getSaldoReal() . "</p>";
         if ($user->getUsername() === "admin") {
             echo "<p><a href='/investimento/src/Model/admin.php'>Área de Administração</a></p>";
         }

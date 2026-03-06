@@ -52,8 +52,7 @@ class Historico
         self::saveAllUsers($users);
     }
 
-    public static function adicionarVenda($username, $nomeEmpresa, $symbol, $quantidade, $preco)
-    {
+    public static function adicionarVenda($username, $nomeEmpresa, $symbol, $quantidade, $preco) {
         $users = self::loadAllUsers();
         foreach ($users as &$u) {
             if ($u['username'] === $username) {

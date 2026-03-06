@@ -25,6 +25,7 @@
     require_once __DIR__ . '/../src/Model/historico.php';
     require_once __DIR__ . '/../src/Model/cacheJson.php';
     require_once __DIR__ . '/../src/Model/utilizador.php';
+    
     //session_start();
     if (!isset($_SESSION['utilizador'])) {
         header('Location: login.php');
@@ -61,11 +62,11 @@
     $currentPrices = [];
     foreach ($carteira as $symbol => $data) {
         $url = "https://financialmodelingprep.com/stable/profile?symbol=$symbol&apikey=" . API_KEY;
-        //$dados = json_decode(file_get_contents($url), true);
-        if (carregarDadosCache("infoEmpresa_$symbol")) {
-            $dados = carregarDadosCache("infoEmpresa_$symbol");
+
+        if (carregarDadosCache("info_empresa_$symbol")) {
+            $dados = carregarDadosCache("info_empresa_$symbol");
         } else {
-            $dados = criarCacheJson("infoEmpresa_$symbol", $url);
+            $dados = criarCacheJson("info_empresa_$symbol", $url);
         }
         if (!empty($dados)) {
             $currentPrices[$symbol] = floatval($dados[0]['price']);
@@ -74,19 +75,44 @@
         }
     }
 
-    // Processar venda
+    // Processar atualização de preços
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar_precos'])) {
+        // Limpar cache e buscar novos preços
+        foreach (array_keys($carteira) as $symbol) {
+            $arquivoCache = __DIR__ . '/investimento/data_' . $symbol . '.json';
+            if (file_exists($arquivoCache)) {
+                unlink($arquivoCache); // Deletar arquivo de cache
+            }
+        }
+        // Recarregar página para buscar novos preços
+        echo "<script>window.reload()</script>";
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vender'])) {
+
         $symbol = $_POST['symbol'];
         $quant_venda = intval($_POST['quant_venda']);
+        $resultado = processarVenda($username, $symbol, $quant_venda);
+      
+    }
+
+    // Processar venda
+    function processarVenda($username, $symbol, $quant_venda) {
+        // Lógica para processar a venda, atualizar saldo e histórico
+        // Retorna um array com o resultado da operação
+        global $saldo;
+        global $carteira;
         if ($quant_venda > 0 && isset($carteira[$symbol]) && $carteira[$symbol]['quantidade'] >= $quant_venda) {
             $preco_atual = $currentPrices[$symbol] ?? 0;
             $valor_venda = $preco_atual * $quant_venda;
-            $novo_saldo = $saldo + $valor_venda;
+            $novo_saldo =  $saldo + $valor_venda;
+
             Utilizador::atualizarSaldo($username, $novo_saldo);
             Historico::adicionarVenda($username, $carteira[$symbol]['nome'], $symbol, $quant_venda, $preco_atual);
             $dadosAtualizados = Utilizador::findUser($username);
             $_SESSION["utilizador"] = new Utilizador($dadosAtualizados["username"], "", $novo_saldo);
             $saldo = $novo_saldo;
+
             // Recalcular carteira
             $carteira[$symbol]['quantidade'] -= $quant_venda;
             if ($carteira[$symbol]['quantidade'] <= 0) {
@@ -96,6 +122,12 @@
         } else {
             echo "<p>Erro na venda: quantidade inválida ou insuficiente.</p>";
         }
+         return [
+            'success' => true,
+            'valor_venda' => $valor_venda,
+            'novo_saldo' => $novo_saldo
+        ];
+
     }
     ?>
 
@@ -104,8 +136,16 @@
         <p>$<?php echo number_format($saldo,2); ?></p>
     </div>
 
+    <!--Portfólio Atual-->
     <div class="section">
-        <h2>Portfólio Atual</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h2 style="margin: 0;">Portfólio Atual</h2>
+            <?php if (!empty($carteira)): ?>
+                <form method="POST" style="margin: 0;">
+                    <button type="submit" name="atualizar_precos" style="padding: 8px 16px; background: #2a5298; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">🔄 Atualizar Preços</button>
+                </form>
+            <?php endif; ?>
+        </div>
         <?php if (empty($carteira)): ?>
             <p>Nenhuma ação no portfólio.</p>
         <?php else: ?>
@@ -114,7 +154,7 @@
                     <th>Símbolo</th>
                     <th>Nome</th>
                     <th>Quantidade</th>
-                    <th>Preço Médio</th>
+                    <th>Preço Atual</th>
                     <th>Valor Atual</th>
                     <th>Rendimento</th>
                     <th>Ação</th>
@@ -122,7 +162,6 @@
                 <?php foreach ($carteira as $symbol => $data): 
                     $quant = $data['quantidade'];
                     $preco_medio = $quant > 0 ? $data['total_investido'] / $quant : 0;
-                    var_dump("total_investido: ", $data["total_investido"]);
                     $preco_atual = $currentPrices[$symbol] ?? 0;
                     $valor_atual = $preco_atual * $quant;
                     $investido = $data['total_investido'];
@@ -132,9 +171,9 @@
                     <td><?php echo $symbol; ?></td>
                     <td><?php echo $data['nome']; ?></td>
                     <td><?php echo $quant; ?></td>
-                    <td>$ <?php echo number_format($preco_medio, 2); ?></td>
+                    <td>$ <?php echo number_format($preco_atual, 2); ?></td>
                     <td>$ <?php echo number_format($valor_atual, 2); ?></td>
-                    <td>$ <?php echo number_format($rendimento, 2); ?> (<?php echo $investido > 0 ? ($rendimento / $investido) * 100 . '%' : '0%'; ?>)</td>
+                    <td>$ <?php echo number_format($rendimento, 2); ?> (<?php echo $investido > 0 ? number_format(($rendimento / $investido) * 100, 2) . '%' : '0%'; ?>)</td>
                     <td>
                         <form class="sell-form" method="POST">
                             <input type="hidden" name="symbol" value="<?php echo $symbol; ?>">
@@ -148,6 +187,7 @@
         <?php endif; ?>
     </div>
 
+    <!--Histórico Transações-->
     <div class="section">
         <h2>Histórico de Transações</h2>
         <?php if (empty($historico)): ?>

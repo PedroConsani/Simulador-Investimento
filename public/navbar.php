@@ -186,7 +186,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="user-info">
                 👤 <strong><?php echo htmlspecialchars($_SESSION['utilizador']->getUsername()); ?></strong> | 💰 $ <?php echo number_format($_SESSION['utilizador']->getSaldoReal(), 2); ?>
             </div>
-            <a href="logout.php" class="logout-btn">🚪 Logout</a>
+            <a href="/investimento/public/logout.php" class="logout-btn">🚪 Logout</a>
         <?php endif; ?>
     </div>
 </nav>
@@ -197,7 +197,7 @@ if (session_status() === PHP_SESSION_NONE) {
         navbarLinks.classList.toggle('active');
     });
 
-    // Fechar menu ao clicar em um link
+    // Fechar menu ao clicar em um link (mobile)
     document.querySelectorAll('.navbar-links a').forEach(link => {
         link.addEventListener('click', function() {
             document.getElementById('navbarLinks').classList.remove('active');

@@ -37,7 +37,8 @@
         $arquivo = __DIR__ . "/../Dados/dados_$nomeEmpresa.json";
         $existe = false;
 
-        if (carregarDadosCache($nomeEmpresa)) {
+
+        if (carregarDadosCache($nomeEmpresa) && $_SESSION["utilizador"]->getUsername() == "admin") {
             $dados = carregarDadosCache($nomeEmpresa);
         } else {
             $url = "https://financialmodelingprep.com/stable/search-name?query=$nomeEmpresa&apikey=".API_KEY;
