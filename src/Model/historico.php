@@ -37,13 +37,14 @@ class Historico
                     $u['historico'] = [];
                 }
                 $entrada = [
-                    'tipo' => 'COMPRA',
+                    'tipo' => 'compra',
                     'symbol' => $symbol,
                     'nomeEmpresa' => $nomeEmpresa,
                     'quantidade' => $quantidade,
                     'preco' => $preco,
                     'data' => date("Y-m-d H:i:s")
                 ];
+                //Adiciona a entrada ao final da lista do historico do utilizador
                 $u['historico'][] = $entrada;
                 break;
             }
@@ -60,7 +61,7 @@ class Historico
                     $u['historico'] = [];
                 }
                 $entrada = [
-                    'tipo' => 'VENDA',
+                    'tipo' => 'venda',
                     'symbol' => $symbol,
                     'nomeEmpresa' => $nomeEmpresa,
                     'quantidade' => $quantidade,

@@ -5,24 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes da Empresa: <?php echo $_GET["symbol"] ?? "Desconhecida"; ?></title>
+    <style>
+        body { font-family: Arial, sans-serif; margin-top: 0; }
+        .details-container { max-width: 1200px; margin: 30px auto; padding: 20px; }
+        .details-container h2 { color: #1e3c72; margin-bottom: 10px; }
+        .details-container p { margin: 10px 0; }
+        .details-container hr { margin: 20px 0; border: none; border-top: 1px solid #ccc; }
+        .buy-form { margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 4px; }
+        .buy-form label { display: block; margin-bottom: 10px; font-weight: 600; color: #333; }
+        .buy-form input { padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; }
+        .buy-form button { padding: 10px 20px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+        .buy-form button:hover { opacity: 0.9; }
+        .info-box { background: #e8f4f8; padding: 15px; border-radius: 4px; margin: 10px 0; border-left: 4px solid #2a5298; }
+    </style>
 </head>
-
 <body>
-    <nav>
-        <a href="/investimento/public/index.php">
-            <li>Home</li>
-        </a>
-        <a href="paper_tr_jogo.php">
-            <li>Paper Trading Passado</li>
-        </a>
-        <a href="paper_tr_real.php">
-            <li>Paper Trading Real</li>
-        </a>
-    </nav>
+    <?php include __DIR__ . '/../../public/navbar.php'; ?>
+    <div class="details-container">
 
     <?php
     require_once __DIR__ . "/../../config/config.php";
     require_once __DIR__ . "/cacheJson.php";
+    require_once __DIR__ . "/utilizador.php";
+    require_once __DIR__ . "/historico.php";
+    session_start();
 
     if (isset($_GET["symbol"])) {
         $symbol = $_GET["symbol"];
@@ -38,19 +44,20 @@
             $preco = $empresa["price"];
 
             echo "<h2>" . $empresa["companyName"] . "</h2>";
-            echo "<p>Preço por ação: $ <span id='preco'>$preco</span></p>";;
+            echo "<p>Preço por ação: $ <span id='preco'>$preco</span></p>";
             echo "<p>" . $empresa["description"] . "</p>";
 
             echo "<hr>";
 
             // FORMULÁRIO DE COMPRA
-
+            echo '<div class="buy-form">';
             echo '<form method="POST">';
             echo '<label>Quantidade de Ações:</label>';
             echo '<input type="number" id="quantidade" name="quantidade" min="1" required>';
             echo '<p>Total: $ <span id="total"> 0.00 </span></p>';
             echo '<button type="submit" name="comprar">Comprar</button>';
             echo '</form>';
+            echo '</div>';
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quantidade'])) {
             $quant = intval($_POST['quantidade']);
@@ -63,24 +70,17 @@
                     $username = $_SESSION['utilizador']->getUsername();
                     $usuarioData = Utilizador::findUser($username);
                     $saldoAtual = isset($usuarioData['saldo']) ? floatval($usuarioData['saldo']) : 0.0;
-                    $custo = $precoAtual * $quant;
+                    $custo = $preco * $quant;
                     if ($saldoAtual < $custo) {
-                        echo "<p>Saldo insuficiente. Custo: $custo, Saldo: $saldoAtual</p>";
+                        echo "<p>Saldo insuficiente. Custo: $$custo, Saldo: $$saldoAtual</p>";
                     } else {
                         $novoSaldo = $saldoAtual - $custo;
                         // Atualiza saldo e histórico
                         Utilizador::atualizarSaldo($username, $novoSaldo);
-                        $entrada = [
-                            'tipo' => 'compra',
-                            'symbol' => $symbol,
-                            'nomeEmpresa' => $empresa['companyName'] ?? '',
-                            'quantidade' => $quant,
-                            'preco' => $precoAtual,
-                            'data' => date("Y-m-d H:i:s")
-                        ];
-                        Utilizador::adicionarHistorico($username, $entrada);
+                        Historico::adicionarCompra($username, $empresa['companyName'] ?? '', $symbol, $quant, $preco);
                         // Atualiza o objeto na sessão
-                        $_SESSION['utilizador']->setSaldoReal($novoSaldo);
+                        $dadosAtualizados = Utilizador::findUser($username);
+                        $_SESSION['utilizador'] = new Utilizador($dadosAtualizados['username'], '', $dadosAtualizados['saldo']);
                         echo "<p>Compra efetuada com sucesso! Custo: $custo. Novo saldo: $novoSaldo</p>";
                     }
                 }
@@ -100,6 +100,7 @@
             totalSpan.innerText = total.toFixed(2);
         });
     </script>
+    </div>
 </body>
 
 </html>

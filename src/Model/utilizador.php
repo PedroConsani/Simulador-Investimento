@@ -31,14 +31,6 @@ class Utilizador {
         return $this->saldoReal;
     }
 
-    public function getSaldoJogo() {
-        return $this->saldoJogo;
-    }
-
-    public function setSaldoJogo($valor) {
-        $this->saldoJogo = $valor;
-    }
-
     /********************
      * Funções estáticas
      ********************/
@@ -110,7 +102,7 @@ class Utilizador {
         $users = self::loadUsers();
         foreach ($users as &$u) {
             if ($u['username'] === $username) {
-                $u['saldo'] = $novoSaldoReal;
+                $u['saldo'] =$novoSaldoReal;
                 break;
             }
         }

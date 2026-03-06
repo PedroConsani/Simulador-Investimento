@@ -8,8 +8,89 @@
     {
         "username": "admin",
         "password": "$2y$10$QIqGVmEUUF4NE2K\/aR3lu.HXMszBhWQtfkY6pW4OaIaLm2Z2dN7YG",
-        "saldo": 300,
-        "historico": []
+        "saldo": 1235.82,
+        "historico": [
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 3,
+                "preco": null,
+                "data": "2026-03-06 16:15:41"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": null,
+                "data": "2026-03-06 16:19:10"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 264.18,
+                "data": "2026-03-06 17:16:52"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 264.18,
+                "data": "2026-03-06 17:18:00"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 264.18,
+                "data": "2026-03-06 17:26:16"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 264.18,
+                "data": "2026-03-06 17:27:15"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 264.18,
+                "data": "2026-03-06 17:27:33"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 264.18,
+                "data": "2026-03-06 17:29:20"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 264.18,
+                "data": "2026-03-06 17:34:02"
+            },
+            {
+                "tipo": "compra",
+                "symbol": "AAPL",
+                "nomeEmpresa": "Apple Inc.",
+                "quantidade": 1,
+                "preco": 264.18,
+                "data": "2026-03-06 17:34:20"
+            }
+        ]
     },
     {
         "username": "teste",
