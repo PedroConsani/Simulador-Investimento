@@ -170,21 +170,21 @@ if (session_status() === PHP_SESSION_NONE) {
     <button class="navbar-toggle" id="navbarToggle">☰</button>
 
     <ul class="navbar-links" id="navbarLinks">
-        <li><a href="index.php">📊 Home</a></li>
+        <li><a href="/investimento/public/index.php">📊 Home</a></li>
         <?php if (isset($_SESSION['utilizador'])): ?>
-            <li><a href="dashboard.php">💼 Dashboard</a></li>
-            <li><a href="../src/Model/paper_tr_real.php">📈 Paper Trading Real</a></li>
+            <li><a href="/investimento/public/dashboard.php">💼 Dashboard</a></li>
+            <li><a href="/investimento/src/Model/paper_tr_real.php">📈 Paper Trading Real</a></li>
         <?php else: ?>
-            <li><a href="/src/Model/paper_tr_real.php">📈 Paper Trading Real</a></li>
-            <li><a href="login.php">🔐 Login</a></li>
-            <li><a href="register.php">✍️ Registro</a></li>
+            <li><a href="/investimento/src/Model/paper_tr_real.php">📈 Paper Trading Real</a></li>
+            <li><a href="/investimento/public/login.php">🔐 Login</a></li>
+            <li><a href="/investimento/public/register.php">✍️ Registro</a></li>
         <?php endif; ?>
     </ul>
 
     <div class="navbar-user-section">
         <?php if (isset($_SESSION['utilizador'])): ?>
             <div class="user-info">
-                👤 <strong><?php echo htmlspecialchars($_SESSION['utilizador']->getUsername()); ?></strong>
+                👤 <strong><?php echo htmlspecialchars($_SESSION['utilizador']->getUsername()); ?></strong> | 💰 $ <?php echo number_format($_SESSION['utilizador']->getSaldoReal(), 2); ?>
             </div>
             <a href="logout.php" class="logout-btn">🚪 Logout</a>
         <?php endif; ?>

@@ -8,7 +8,7 @@
 <body>    <?php include 'navbar.php'; ?>
     <div style="max-width: 1200px; margin: 0 auto;">    <?php
     require_once __DIR__ . "/../src/Model/utilizador.php";
-    session_start();
+    //session_start();
     if (isset($_SESSION['utilizador']) && $_SESSION['utilizador'] instanceof Utilizador) {
         $user = $_SESSION['utilizador'];
         echo "<h1>Bem-vindo, " . htmlspecialchars($user->getUsername()) . "!</h1>";

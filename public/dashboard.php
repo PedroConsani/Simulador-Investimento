@@ -25,7 +25,7 @@
     require_once __DIR__ . '/../src/Model/historico.php';
     require_once __DIR__ . '/../src/Model/cacheJson.php';
     require_once __DIR__ . '/../src/Model/utilizador.php';
-    session_start();
+    //session_start();
     if (!isset($_SESSION['utilizador'])) {
         header('Location: login.php');
         exit;
@@ -84,7 +84,8 @@
             $novo_saldo = $saldo + $valor_venda;
             Utilizador::atualizarSaldo($username, $novo_saldo);
             Historico::adicionarVenda($username, $carteira[$symbol]['nome'], $symbol, $quant_venda, $preco_atual);
-            $_SESSION['utilizador']->setSaldoReal($novo_saldo);
+            $dadosAtualizados = Utilizador::findUser($username);
+            $_SESSION["utilizador"] = new Utilizador($dadosAtualizados["username"], "", $novo_saldo);
             $saldo = $novo_saldo;
             // Recalcular carteira
             $carteira[$symbol]['quantidade'] -= $quant_venda;
@@ -100,7 +101,7 @@
 
     <div class="section">
         <h2>Saldo Atual</h2>
-        <p>$<?php echo $saldo; ?></p>
+        <p>$<?php echo number_format($saldo,2); ?></p>
     </div>
 
     <div class="section">
@@ -131,9 +132,9 @@
                     <td><?php echo $symbol; ?></td>
                     <td><?php echo $data['nome']; ?></td>
                     <td><?php echo $quant; ?></td>
-                    <td>$ <?php echo $preco_medio; ?></td>
-                    <td>$ <?php echo $valor_atual; ?></td>
-                    <td>$ <?php echo $rendimento; ?> (<?php echo $investido > 0 ? ($rendimento / $investido) * 100 . '%' : '0%'; ?>)</td>
+                    <td>$ <?php echo number_format($preco_medio, 2); ?></td>
+                    <td>$ <?php echo number_format($valor_atual, 2); ?></td>
+                    <td>$ <?php echo number_format($rendimento, 2); ?> (<?php echo $investido > 0 ? ($rendimento / $investido) * 100 . '%' : '0%'; ?>)</td>
                     <td>
                         <form class="sell-form" method="POST">
                             <input type="hidden" name="symbol" value="<?php echo $symbol; ?>">
@@ -169,8 +170,8 @@
                     <td><?php echo $trans['symbol']; ?></td>
                     <td><?php echo $trans['nomeEmpresa']; ?></td>
                     <td><?php echo $trans['quantidade']; ?></td>
-                    <td>$ <?php echo $trans['preco'] ?? 0; ?></td>
-                    <td>$ <?php echo $trans['preco'] ?? 0 * $trans['quantidade']; ?></td>
+                    <td>$ <?php echo number_format($trans['preco'] ?? 0, 2); ?></td>
+                    <td>$ <?php echo number_format(($trans['preco'] ?? 0) * $trans['quantidade'], 2); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </table>

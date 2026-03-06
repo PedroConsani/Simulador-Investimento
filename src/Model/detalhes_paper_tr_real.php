@@ -28,7 +28,7 @@
     require_once __DIR__ . "/cacheJson.php";
     require_once __DIR__ . "/utilizador.php";
     require_once __DIR__ . "/historico.php";
-    session_start();
+    //session_start();
 
     if (isset($_GET["symbol"])) {
         $symbol = $_GET["symbol"];
@@ -92,6 +92,7 @@
         const preco = parseFloat(document.getElementById("preco").innerText);
         const inputQtd = document.getElementById("quantidade");
         const totalSpan = document.getElementById("total");
+        const compra = document.querySelector("button[name='comprar']");
 
         // Atualiza o total conforme a quantidade é digitada
         inputQtd.addEventListener("input", function() {
@@ -99,6 +100,12 @@
             const total = preco * quantidade;
             totalSpan.innerText = total.toFixed(2);
         });
+
+        compra.addEventListener("click", function(){
+           setTimeout(function(){
+                window.location.reload();
+           },10) 
+        })
     </script>
     </div>
 </body>
