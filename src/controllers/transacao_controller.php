@@ -116,14 +116,14 @@ class ServicoTransacao {
             }
 
             // Obtém a carteira atual do usuário
-            $carteira = Portfolio::obterCarteiraAtual($username);
+            $portfolio = Portfolio::obterCarteiraAtual($username);
 
             // Verifica se o usuário possui a ação e quantidade suficiente
-            if (!isset($carteira[$symbol]) || $carteira[$symbol]['quantidade'] < $quantidade) {
+            if (!isset($portfolio[$symbol]) || $portfolio[$symbol]['quantidade'] < $quantidade) {
                 return [
                     'success' => false,
                     'erro' => 'Quantidade insuficiente em carteira',
-                    'possui' => $carteira[$symbol]['quantidade'] ?? 0,
+                    'possui' => $portfolio[$symbol]['quantidade'] ?? 0,
                     'tentou_vender' => $quantidade
                 ];
             }
@@ -133,7 +133,7 @@ class ServicoTransacao {
             $novoSaldo = $saldoAtual + $valorVenda;
 
             // Registra a transação no histórico
-            Historico::adicionarVenda($username, $carteira[$symbol]['nome'], $symbol, $quantidade, $preco);
+            Historico::adicionarVenda($username, $portfolio[$symbol]['nome'], $symbol, $quantidade, $preco);
 
             // Atualiza o saldo do usuário
             Utilizador::atualizarSaldo($username, $novoSaldo);

@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <?php include __DIR__ . '/../../public/navbar.php'; ?>
+    <?php include __DIR__ . '/navbar.php'; ?>
     <div class="search-container">
         <form action="" method="GET">
             <input type="text" name="q" placeholder="Pesquisar..." />
@@ -27,8 +27,8 @@
         </form>
 
   <?php
-    require_once __DIR__ . "/../../config/config.php";
-    require_once __DIR__ . "/cacheJson.php";
+    require_once __DIR__ . "/../config/config.php";
+    require_once __DIR__ . "/../src/model/cacheJson.php";
 
     $dados = [];
 

@@ -23,7 +23,7 @@
     <?php
     require_once __DIR__ . '/../config/config.php';
     require_once __DIR__ . '/../config/database.php';
-    require_once __DIR__ . '/../src/service/servico_transacao.php';
+    require_once __DIR__ . '/../src/controllers/transacao_controller.php';
     require_once __DIR__ . '/../src/Model/utilizador.php';
     require_once __DIR__ . '/../src/Model/historico.php';
     require_once __DIR__ . '/../src/Model/portfolio.php';
@@ -79,7 +79,7 @@
         $resultado = ServicoTransacao::processarCompra($username, $symbol, '', $quant_compra, $preco_compra);
 
         if ($resultado['success']) {
-            echo "<script>window.location.href = 'dashboard.php?compra_sucesso=1&valor={$resultado['valor_compra']}&saldo={$resultado['novo_saldo']}';</script>";
+            echo "<script>window.location.href = 'dashboard.php?compra_sucesso=1&valor={$resultado['custo_total']}&saldo={$resultado['novo_saldo']}';</script>";
             exit;
         } else {
             echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($resultado['erro']) . "';</script>";
@@ -96,10 +96,11 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vender'])) {
         $symbol = $_POST['symbol'];
         $quant_venda = intval($_POST['quant_venda']);
+        global $carteira;
 
         // Obtém informações da ação para o nome da empresa
-        $infoAcao = ServicoTransacao::obterInfoAcao($symbol);
-        $nomeEmpresa = $infoAcao['companyName'] ?? $carteira[$symbol]['nome'] ?? 'N/A';
+        // $infoAcao = ServicoTransacao::obterInfoAcao($symbol);
+        // $nomeEmpresa = $infoAcao['companyName'] ?? $carteira[$symbol]['nome'] ?? 'N/A';
 
         // Obtém preço atual
         $preco_atual = $currentPrices[$symbol] ?? 0;
@@ -109,6 +110,7 @@
 
         // Após processar, redirecionar para evitar reenvio do POST ao recarregar
         if ($resultado['success']) {
+            $_SESSION['utilizador']->recarregarSessao(); // Atualiza o objeto na sessão com os novos dados do usuário
             echo "<script>window.location.href = 'dashboard.php?venda_sucesso=1&valor={$resultado['valor_venda']}&saldo={$resultado['novo_saldo']}';</script>";
             exit;
         } else {
@@ -169,20 +171,22 @@
                 </tr>
                 <?php foreach ($carteira as $symbol => $data): 
                     $quant = $data['quantidade'];
-                    $preco_medio = $quant > 0 ? $data['total_investido'] / $quant : 0;
-                    $preco_atual = $currentPrices[$symbol] ?? 0;
-                    $valor_atual = $preco_atual * $quant;
-                    $investido = $data['total_investido'];
-                    $rendimento = $valor_atual - $investido;
+                    print_r("Quantidade: " . $data["quantidade"]);
+                    $total_investido = $data["total_investido"];
+                    $preco_medio = $quant > 0 ? $total_investido / $quant : 0;
+                    // $preco_atual = $currentPrices[$symbol] ?? 0;
+                    $valor_atual = $preco_medio * $quant;
+                    
+                    $rendimento = $valor_atual - $total_investido;
                 ?>
                 <tr>
                     <td><?php echo $symbol; ?></td>
                     <td><?php echo $data['nome']; ?></td>
                     <td><?php echo $quant; ?></td>
                     <td>$ <?php echo number_format($preco_medio, 2); ?></td>
-                    <td>$ <?php echo number_format($preco_atual, 2); ?></td>
                     <td>$ <?php echo number_format($valor_atual, 2); ?></td>
-                    <td>$ <?php echo number_format($rendimento, 2); ?> (<?php echo $investido > 0 ? number_format(($rendimento / $investido) * 100, 2) . '%' : '0%'; ?>)</td>
+                    <td>$ <?php echo number_format($valor_atual, 2); ?></td>
+                    <td>$ <?php echo number_format($rendimento, 2); ?> (<?php echo $total_investido > 0 ? number_format(($rendimento / $total_investido) * 100, 2) . '%' : '0%'; ?>)</td>
                     <td>
                         <form class="sell-form" method="POST">
                             <input type="hidden" name="symbol" value="<?php echo $symbol; ?>">
