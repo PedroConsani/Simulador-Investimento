@@ -60,32 +60,32 @@
         }
     }
 
-    // Processar compra
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comprar'])) {
-        $symbol = strtoupper(trim($_POST['symbol_compra']));
-        $quant_compra = floatval($_POST['quant_compra']);
-        $preco_compra = floatval($_POST['preco_compra']);
+    // // Processar compra
+    // if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comprar'])) {
+    //     $symbol = strtoupper(trim($_POST['symbol_compra']));
+    //     $quant_compra = floatval($_POST['quant_compra']);
+    //     $preco_compra = floatval($_POST['preco_compra']);
 
-        // Valida primeiro
-        $validacao = ServicoTransacao::validarTransacao('compra', $username, $symbol, $quant_compra, $preco_compra);
+    //     // Valida primeiro
+    //     $validacao = ServicoTransacao::validarTransacao('compra', $username, $symbol, $quant_compra, $preco_compra);
 
-        if (!$validacao['valido']) {
-            $erros_compra = implode('<br>', $validacao['erros']);
-            echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($erros_compra) . "';</script>";
-            exit;
-        }
+    //     if (!$validacao['valido']) {
+    //         $erros_compra = implode('<br>', $validacao['erros']);
+    //         echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($erros_compra) . "';</script>";
+    //         exit;
+    //     }
 
-        // Processa a compra
-        $resultado = ServicoTransacao::processarCompra($username, $symbol, '', $quant_compra, $preco_compra);
+    //     // Processa a compra
+    //     $resultado = ServicoTransacao::processarCompra($username, $symbol, '', $quant_compra, $preco_compra);
 
-        if ($resultado['success']) {
-            echo "<script>window.location.href = 'dashboard.php?compra_sucesso=1&valor={$resultado['custo_total']}&saldo={$resultado['novo_saldo']}';</script>";
-            exit;
-        } else {
-            echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($resultado['erro']) . "';</script>";
-            exit;
-        }
-    }
+    //     if ($resultado['success']) {
+    //         echo "<script>window.location.href = 'dashboard.php?compra_sucesso=1&valor={$resultado['custo_total']}&saldo={$resultado['novo_saldo']}';</script>";
+    //         exit;
+    //     } else {
+    //         echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($resultado['erro']) . "';</script>";
+    //         exit;
+    //     }
+    // }
 
     // Processar atualização de preços
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar_precos'])) {
