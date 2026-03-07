@@ -173,9 +173,9 @@ if (session_status() === PHP_SESSION_NONE) {
         <li><a href="/investimento/public/index.php">📊 Home</a></li>
         <?php if (isset($_SESSION['utilizador'])): ?>
             <li><a href="/investimento/public/dashboard.php">💼 Dashboard</a></li>
-            <li><a href="/investimento/src/Model/paper_tr_real.php">📈 Paper Trading Real</a></li>
+            <li><a href="/investimento/public/explorar.php">📈 Paper Trading Real</a></li>
         <?php else: ?>
-            <li><a href="/investimento/src/Model/paper_tr_real.php">📈 Paper Trading Real</a></li>
+            <li><a href="/investimento/public/explorar.php">📈 Paper Trading Real</a></li>
             <li><a href="/investimento/public/login.php">🔐 Login</a></li>
             <li><a href="/investimento/public/register.php">✍️ Registro</a></li>
         <?php endif; ?>

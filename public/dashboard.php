@@ -15,18 +15,20 @@
     </style>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include_once __DIR__ . '/navbar.php'; ?>
+
     <div style="max-width: 1200px; margin: 0 auto;">
         <h1>Dashboard do Portfólio</h1>
 
     <?php
     require_once __DIR__ . '/../config/config.php';
+    require_once __DIR__ . '/../config/database.php';
+    require_once __DIR__ . '/../src/service/servico_transacao.php';
     require_once __DIR__ . '/../src/Model/utilizador.php';
     require_once __DIR__ . '/../src/Model/historico.php';
+    require_once __DIR__ . '/../src/Model/portfolio.php';
     require_once __DIR__ . '/../src/Model/cacheJson.php';
-    require_once __DIR__ . '/../src/Model/utilizador.php';
-    
-    //session_start();
+
     if (!isset($_SESSION['utilizador'])) {
         header('Location: login.php');
         exit;
@@ -36,27 +38,10 @@
     $username = $user->getUsername();
     $userData = Utilizador::findUser($username);
     $saldo = isset($userData['saldo']) ? $userData['saldo']: 0.0;
-    $historico = $userData['historico'] ?? [];
+    $historico = Historico::obterHistoricoUtilizador($username);
 
     // Montagem da carteira com base no histórico de transações
-    $carteira = [];
-    foreach ($historico as $trans) {
-        $symbol = $trans['symbol'];
-        $quant = intval($trans['quantidade']);
-        if ($trans['tipo'] === 'compra') {
-            if (!isset($carteira[$symbol])) {
-                $carteira[$symbol] = ['quantidade' => 0, 'total_investido' => 0, 'nome' => $trans['nomeEmpresa']];
-            }
-            $carteira[$symbol]['quantidade'] += $quant;
-            $carteira[$symbol]['total_investido'] += ($trans['preco'] ?? 0) * $quant;
-        } elseif ($trans['tipo'] === 'venda') {
-            $carteira[$symbol]['quantidade'] -= $quant;
-            $carteira[$symbol]['total_investido'] -= ($trans['preco'] ?? 0) * $quant;
-            if ($carteira[$symbol]['quantidade'] <= 0) {
-                unset($carteira[$symbol]);
-            }
-        }
-    }
+    $carteira = Portfolio::obterCarteiraAtual($username);
 
     // Obter preços atuais
     $currentPrices = [];
@@ -75,59 +60,81 @@
         }
     }
 
+    // Processar compra
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comprar'])) {
+        $symbol = strtoupper(trim($_POST['symbol_compra']));
+        $quant_compra = floatval($_POST['quant_compra']);
+        $preco_compra = floatval($_POST['preco_compra']);
+
+        // Valida primeiro
+        $validacao = ServicoTransacao::validarTransacao('compra', $username, $symbol, $quant_compra, $preco_compra);
+
+        if (!$validacao['valido']) {
+            $erros_compra = implode('<br>', $validacao['erros']);
+            echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($erros_compra) . "';</script>";
+            exit;
+        }
+
+        // Processa a compra
+        $resultado = ServicoTransacao::processarCompra($username, $symbol, '', $quant_compra, $preco_compra);
+
+        if ($resultado['success']) {
+            echo "<script>window.location.href = 'dashboard.php?compra_sucesso=1&valor={$resultado['valor_compra']}&saldo={$resultado['novo_saldo']}';</script>";
+            exit;
+        } else {
+            echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($resultado['erro']) . "';</script>";
+            exit;
+        }
+    }
+
     // Processar atualização de preços
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar_precos'])) {
-        // Limpar cache e buscar novos preços
-        foreach (array_keys($carteira) as $symbol) {
-            $arquivoCache = __DIR__ . '/investimento/data_' . $symbol . '.json';
-            if (file_exists($arquivoCache)) {
-                unlink($arquivoCache); // Deletar arquivo de cache
-            }
-        }
-        // Recarregar página para buscar novos preços
-        echo "<script>window.reload()</script>";
+        // Redirecionar para recarregar com preços atualizados (cache será ignorado)
+        echo "<script>window.location.href = 'dashboard.php?precos_atualizados=1';</script>";
+        exit;
     }
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vender'])) {
-
         $symbol = $_POST['symbol'];
         $quant_venda = intval($_POST['quant_venda']);
-        $resultado = processarVenda($username, $symbol, $quant_venda);
-      
+
+        // Obtém informações da ação para o nome da empresa
+        $infoAcao = ServicoTransacao::obterInfoAcao($symbol);
+        $nomeEmpresa = $infoAcao['companyName'] ?? $carteira[$symbol]['nome'] ?? 'N/A';
+
+        // Obtém preço atual
+        $preco_atual = $currentPrices[$symbol] ?? 0;
+
+        // Processa a venda usando o serviço
+        $resultado = ServicoTransacao::processarVenda($username, $symbol, $quant_venda, $preco_atual);
+
+        // Após processar, redirecionar para evitar reenvio do POST ao recarregar
+        if ($resultado['success']) {
+            echo "<script>window.location.href = 'dashboard.php?venda_sucesso=1&valor={$resultado['valor_venda']}&saldo={$resultado['novo_saldo']}';</script>";
+            exit;
+        } else {
+            echo "<script>window.location.href = 'dashboard.php?venda_erro=1&mensagem=" . urlencode($resultado['erro']) . "';</script>";
+            exit;
+        }
     }
 
-    // Processar venda
-    function processarVenda($username, $symbol, $quant_venda) {
-        // Lógica para processar a venda, atualizar saldo e histórico
-        // Retorna um array com o resultado da operação
-        global $saldo;
-        global $carteira;
-        if ($quant_venda > 0 && isset($carteira[$symbol]) && $carteira[$symbol]['quantidade'] >= $quant_venda) {
-            $preco_atual = $currentPrices[$symbol] ?? 0;
-            $valor_venda = $preco_atual * $quant_venda;
-            $novo_saldo =  $saldo + $valor_venda;
-
-            Utilizador::atualizarSaldo($username, $novo_saldo);
-            Historico::adicionarVenda($username, $carteira[$symbol]['nome'], $symbol, $quant_venda, $preco_atual);
-            $dadosAtualizados = Utilizador::findUser($username);
-            $_SESSION["utilizador"] = new Utilizador($dadosAtualizados["username"], "", $novo_saldo);
-            $saldo = $novo_saldo;
-
-            // Recalcular carteira
-            $carteira[$symbol]['quantidade'] -= $quant_venda;
-            if ($carteira[$symbol]['quantidade'] <= 0) {
-                unset($carteira[$symbol]);
-            }
-            echo "<p>Venda efetuada com sucesso! Recebido: $$valor_venda. Novo saldo: $$novo_saldo</p>";
-        } else {
-            echo "<p>Erro na venda: quantidade inválida ou insuficiente.</p>";
-        }
-         return [
-            'success' => true,
-            'valor_venda' => $valor_venda,
-            'novo_saldo' => $novo_saldo
-        ];
-
+    // Verificar mensagens de sucesso/erro via GET
+    $mensagem = '';
+    if (isset($_GET['precos_atualizados'])) {
+        $mensagem = "<div style='background: #d1ecf1; color: #0c5460; padding: 10px; margin-bottom: 20px; border: 1px solid #bee5eb; border-radius: 4px;'>Preços atualizados com sucesso!</div>";
+    } elseif (isset($_GET['compra_sucesso'])) {
+        $valor = $_GET['valor'] ?? 0;
+        $novo_saldo = $_GET['saldo'] ?? 0;
+        $mensagem = "<div style='background: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px; border: 1px solid #c3e6cb; border-radius: 4px;'>Compra efetuada com sucesso! Investido: $" . number_format($valor, 2) . ". Novo saldo: $" . number_format($novo_saldo, 2) . "</div>";
+    } elseif (isset($_GET['compra_erro'])) {
+        $mensagem_erro = $_GET['mensagem'] ?? 'Erro na compra.';
+        $mensagem = "<div style='background: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 20px; border: 1px solid #f5c6cb; border-radius: 4px;'>{$mensagem_erro}</div>";
+    } elseif (isset($_GET['venda_sucesso'])) {
+        $valor = $_GET['valor'] ?? 0;
+        $novo_saldo = $_GET['saldo'] ?? 0;
+        $mensagem = "<div style='background: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px; border: 1px solid #c3e6cb; border-radius: 4px;'>Venda efetuada com sucesso! Recebido: $" . number_format($valor, 2) . ". Novo saldo: $" . number_format($novo_saldo, 2) . "</div>";
+    } elseif (isset($_GET['venda_erro'])) {
+        $mensagem_erro = $_GET['mensagem'] ?? 'Erro na venda: quantidade inválida ou insuficiente.';
+        $mensagem = "<div style='background: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 20px; border: 1px solid #f5c6cb; border-radius: 4px;'>{$mensagem_erro}</div>";
     }
     ?>
 
@@ -135,6 +142,7 @@
         <h2>Saldo Atual</h2>
         <p>$<?php echo number_format($saldo,2); ?></p>
     </div>
+
 
     <!--Portfólio Atual-->
     <div class="section">
@@ -154,7 +162,7 @@
                     <th>Símbolo</th>
                     <th>Nome</th>
                     <th>Quantidade</th>
-                    <th>Preço Atual</th>
+                    <th>Preço Médio</th>
                     <th>Valor Atual</th>
                     <th>Rendimento</th>
                     <th>Ação</th>
@@ -171,6 +179,7 @@
                     <td><?php echo $symbol; ?></td>
                     <td><?php echo $data['nome']; ?></td>
                     <td><?php echo $quant; ?></td>
+                    <td>$ <?php echo number_format($preco_medio, 2); ?></td>
                     <td>$ <?php echo number_format($preco_atual, 2); ?></td>
                     <td>$ <?php echo number_format($valor_atual, 2); ?></td>
                     <td>$ <?php echo number_format($rendimento, 2); ?> (<?php echo $investido > 0 ? number_format(($rendimento / $investido) * 100, 2) . '%' : '0%'; ?>)</td>
@@ -205,7 +214,7 @@
                 </tr>
                 <?php foreach ($historico as $trans): ?>
                 <tr>
-                    <td><?php echo $trans['data']; ?></td>
+                    <td><?php echo $trans['data_transacao']; ?></td>
                     <td><?php echo ucfirst($trans['tipo']); ?></td>
                     <td><?php echo $trans['symbol']; ?></td>
                     <td><?php echo $trans['nomeEmpresa']; ?></td>

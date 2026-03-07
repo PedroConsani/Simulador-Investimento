@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>    <?php include 'navbar.php'; ?>
+<body> <?php include_once __DIR__ . '/navbar.php'; ?>
     <div style="max-width: 1200px; margin: 0 auto;">    <?php
     require_once __DIR__ . "/../src/Model/utilizador.php";
     //session_start();

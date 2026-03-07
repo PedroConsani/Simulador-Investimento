@@ -9,13 +9,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($username === '' || $senha === '') {
         $message = 'Por favor, preencha todos os campos.';
     } else {
-        if (Utilizador::register($username, $senha)) {
-            $message = 'Cadastro efetuado com sucesso. Agora faça login.';
-            // opcional: redirecionar para login
-            header('Location: login.php?registered=1');
-            exit;
-        } else {
-            $message = 'Nome de usuário já existe.';
+        try {
+            if (Utilizador::register($username, $senha)) {
+                // sucesso
+                header('Location: login.php?registered=1');
+                exit;
+            } else {
+                // retorna falso normalmente quando nome já existe
+                $message = 'Nome de usuário já existe.';
+            }
+        } catch (Exception $e) {
+            // erro de BD inesperado
+            $message = 'Erro no servidor: ' . $e->getMessage();
         }
     }
 }
@@ -44,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include_once __DIR__ . '/navbar.php'; ?>
     <div class="register-container">
             <h1>Registrar</h1>
         <?php if ($message): ?>

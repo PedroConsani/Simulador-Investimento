@@ -28,6 +28,7 @@
     require_once __DIR__ . "/cacheJson.php";
     require_once __DIR__ . "/utilizador.php";
     require_once __DIR__ . "/historico.php";
+    require_once __DIR__ . "/../service/servico_transacao.php";
     //session_start();
 
     if (isset($_GET["symbol"])) {
@@ -69,20 +70,34 @@
                     echo "<p>Faça login para comprar ações.</p>";
                 } else {
                     $username = $_SESSION['utilizador']->getUsername();
-                    $usuarioData = Utilizador::findUser($username);
-                    $saldoAtual = isset($usuarioData['saldo']) ? floatval($usuarioData['saldo']) : 0.0;
-                    $custo = $preco * $quant;
-                    if ($saldoAtual < $custo) {
-                        echo "<p>Saldo insuficiente. Custo: $$custo, Saldo: $$saldoAtual</p>";
-                    } else {
-                        $novoSaldo = $saldoAtual - $custo;
-                        // Atualiza saldo e histórico
-                        Utilizador::atualizarSaldo($username, $novoSaldo);
-                        Historico::adicionarCompra($username, $empresa['companyName'] ?? '', $symbol, $quant, $preco);
+
+                    // Processa a compra usando o serviço de transações
+                    $resultado = ServicoTransacao::processarCompra(
+                        $username,
+                        $symbol,
+                        $empresa['companyName'] ?? '',
+                        $quant,
+                        $preco
+                    );
+
+                    if ($resultado['success']) {
                         // Atualiza o objeto na sessão
                         $dadosAtualizados = Utilizador::findUser($username);
                         $_SESSION['utilizador'] = new Utilizador($dadosAtualizados['username'], '', $dadosAtualizados['saldo']);
-                        echo "<p>Compra efetuada com sucesso! Custo: $custo. Novo saldo: $novoSaldo</p>";
+
+                        echo "<div style='background: #d4edda; color: #155724; padding: 10px; margin: 10px 0; border: 1px solid #c3e6cb; border-radius: 4px;'>";
+                        echo "Compra efetuada com sucesso!<br>";
+                        echo "Custo: $" . number_format($resultado['custo_total'], 2) . "<br>";
+                        echo "Novo saldo: $" . number_format($resultado['novo_saldo'], 2);
+                        echo "</div>";
+                    } else {
+                        echo "<div style='background: #f8d7da; color: #721c24; padding: 10px; margin: 10px 0; border: 1px solid #f5c6cb; border-radius: 4px;'>";
+                        echo "Erro na compra: " . $resultado['erro'];
+                        if (isset($resultado['custo']) && isset($resultado['saldo'])) {
+                            echo "<br>Custo necessário: $" . number_format($resultado['custo'], 2);
+                            echo "<br>Saldo disponível: $" . number_format($resultado['saldo'], 2);
+                        }
+                        echo "</div>";
                     }
                 }
             }
