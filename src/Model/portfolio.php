@@ -39,6 +39,7 @@ class Portfolio
             $symbol = $acao['symbol'];
             $carteira[$symbol] = [
                 'quantidade' => floatval($acao['quantidade']),
+                'preco_medio' => floatval($acao['preco_medio']),
                 'total_investido' => floatval($acao['total_investido']),
                 'nome' => $acao['nomeEmpresa']
             ];
@@ -130,5 +131,48 @@ class Portfolio
                 }
             }
         }
+    }
+
+    /**
+     * Atualiza os preços médios de todas as ações no portfólio baseado nos preços atuais
+     */
+    public static function atualizarPrecosMedios($username, $currentPrices)
+    {
+        $user = Utilizador::findUser($username);
+        if (!$user) {
+            return ['sucesso' => false, 'mensagem' => 'Utilizador não encontrado'];
+        }
+
+        $db = Database::getInstance();
+        $utilizador_id = $user['id'];
+
+        // Obter o portfólio atual do utilizador
+        $sql = "SELECT symbol, quantidade, preco_medio FROM portfolio_usuario 
+                WHERE utilizador_id = ? AND quantidade > 0";
+        $portfolio = $db->fetchAll($sql, [$utilizador_id]);
+
+        $atualizadas = 0;
+        foreach ($portfolio as $acao) {
+            $symbol = $acao['symbol'];
+            
+            // Verificar se temos um preço atualizado para esta ação
+            if (isset($currentPrices[$symbol])) {
+                $novo_preco = floatval($currentPrices[$symbol]);
+                $quantidade = floatval($acao['quantidade']);
+                
+                // Atualizar o preço médio na base de dados
+                $updateSql = "UPDATE portfolio_usuario 
+                             SET preco_medio = ? 
+                             WHERE utilizador_id = ? AND symbol = ?";
+                $db->execute($updateSql, [$novo_preco, $utilizador_id, $symbol]);
+                $atualizadas++;
+            }
+        }
+
+        return [
+            'sucesso' => true, 
+            'mensagem' => "Preços atualizados para $atualizadas ação(ões).",
+            'quantidade' => $atualizadas
+        ];
     }
 }

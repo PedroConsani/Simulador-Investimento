@@ -43,12 +43,20 @@
     // Montagem da carteira com base no histórico de transações
     $carteira = Portfolio::obterCarteiraAtual($username);
 
-    // Obter preços atuais
+    // Processar atualização de preços
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar_precos'])) {
+        // Forçar busca na API ignorando cache
+        $forcarAtualizacao = true;
+    } else {
+        $forcarAtualizacao = false;
+    }
+
+    // Obter preços atuais (ignora cache se for atualização forçada)
     $currentPrices = [];
     foreach ($carteira as $symbol => $data) {
         $url = "https://financialmodelingprep.com/stable/profile?symbol=$symbol&apikey=" . API_KEY;
 
-        if (carregarDadosCache("info_empresa_$symbol")) {
+        if (!$forcarAtualizacao && carregarDadosCache("info_empresa_$symbol")) {
             $dados = carregarDadosCache("info_empresa_$symbol");
         } else {
             $dados = criarCacheJson("info_empresa_$symbol", $url);
@@ -60,39 +68,14 @@
         }
     }
 
-    // // Processar compra
-    // if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comprar'])) {
-    //     $symbol = strtoupper(trim($_POST['symbol_compra']));
-    //     $quant_compra = floatval($_POST['quant_compra']);
-    //     $preco_compra = floatval($_POST['preco_compra']);
-
-    //     // Valida primeiro
-    //     $validacao = ServicoTransacao::validarTransacao('compra', $username, $symbol, $quant_compra, $preco_compra);
-
-    //     if (!$validacao['valido']) {
-    //         $erros_compra = implode('<br>', $validacao['erros']);
-    //         echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($erros_compra) . "';</script>";
-    //         exit;
-    //     }
-
-    //     // Processa a compra
-    //     $resultado = ServicoTransacao::processarCompra($username, $symbol, '', $quant_compra, $preco_compra);
-
-    //     if ($resultado['success']) {
-    //         echo "<script>window.location.href = 'dashboard.php?compra_sucesso=1&valor={$resultado['custo_total']}&saldo={$resultado['novo_saldo']}';</script>";
-    //         exit;
-    //     } else {
-    //         echo "<script>window.location.href = 'dashboard.php?compra_erro=1&mensagem=" . urlencode($resultado['erro']) . "';</script>";
-    //         exit;
-    //     }
-    // }
-
-    // Processar atualização de preços
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar_precos'])) {
-        // Redirecionar para recarregar com preços atualizados (cache será ignorado)
+    // Se for atualização de preços, atualizar a base de dados
+    if ($forcarAtualizacao && !empty($currentPrices)) {
+        $resultado = Portfolio::atualizarPrecosMedios($username, $currentPrices);
         echo "<script>window.location.href = 'dashboard.php?precos_atualizados=1';</script>";
         exit;
     }
+
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vender'])) {
         $symbol = $_POST['symbol'];
         $quant_venda = intval($_POST['quant_venda']);
@@ -172,10 +155,10 @@
                 <?php foreach ($carteira as $symbol => $data): 
                     $quant = $data['quantidade'];
                     print_r("Quantidade: " . $data["quantidade"]);
+                    $preco_medio = $data['preco_medio'];
                     $total_investido = $data["total_investido"];
-                    $preco_medio = $quant > 0 ? $total_investido / $quant : 0;
-                    // $preco_atual = $currentPrices[$symbol] ?? 0;
-                    $valor_atual = $preco_medio * $quant;
+                    $preco_atual = $currentPrices[$symbol] ?? $preco_medio;
+                    $valor_atual = $preco_atual * $quant;
                     
                     $rendimento = $valor_atual - $total_investido;
                 ?>
@@ -184,7 +167,6 @@
                     <td><?php echo $data['nome']; ?></td>
                     <td><?php echo $quant; ?></td>
                     <td>$ <?php echo number_format($preco_medio, 2); ?></td>
-                    <td>$ <?php echo number_format($valor_atual, 2); ?></td>
                     <td>$ <?php echo number_format($valor_atual, 2); ?></td>
                     <td>$ <?php echo number_format($rendimento, 2); ?> (<?php echo $total_investido > 0 ? number_format(($rendimento / $total_investido) * 100, 2) . '%' : '0%'; ?>)</td>
                     <td>
