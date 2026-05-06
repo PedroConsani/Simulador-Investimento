@@ -219,4 +219,4 @@ Todas as validações acontecem no serviço antes do processamento.
 
 ---
 
-**Nota**: Este projeto é para fins educacionais. Não use em produção sem auditoria de segurança adicional.
+**Nota**: Este projeto é para fins educacionais. Feito com ajuda de inteligência artificial e verificado/analisado por mim (Pedro).
